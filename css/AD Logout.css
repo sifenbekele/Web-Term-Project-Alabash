@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 210px;
+    background: #fff;
+    height: 100vh;
+    padding: 24px 0 0 0;
+    box-shadow: 1px 0 0 #f0f0f0;
+}
+
+.sidebar-header {
+    padding: 0 24px 18px 24px;
+    font-size: 15px;
+    color: #222;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    padding: 8px 24px;
+    border-radius: 8px;
+    margin: 2px 8px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.sidebar-menu li.active, .sidebar-menu li:hover {
+    background: #f2f4f7;
+}
+
+.sidebar-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    display: block;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px 60px 0 60px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #222;
+}
+
+.subtitle {
+    color: #222;
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+
+.btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-secondary {
+    background: #e5eef6;
+    color: #222;
+    box-shadow: 0 2px 8px rgba(10,132,255,0.06);
+}
+
+.btn-secondary:hover {
+    background: #d1e3f3;
+}

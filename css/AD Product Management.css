@@ -1,0 +1,310 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    background-color: #f9fbfd;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 210px;
+    background: #fff;
+    height: 100vh;
+    padding: 24px 0 0 0;
+    box-shadow: 1px 0 0 #f0f0f0;
+}
+
+.sidebar-header {
+    padding: 0 24px 18px 24px;
+    font-size: 15px;
+    color: #222;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    padding: 8px 24px;
+    border-radius: 8px;
+    margin: 2px 8px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.sidebar-menu li.active, .sidebar-menu li:hover {
+    background: #f2f4f7;
+}
+
+.sidebar-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    display: block;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px 40px 0 40px;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #222;
+}
+
+.add-product-section h2,
+.product-list-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #222;
+}
+
+#productForm {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 900px;
+}
+
+#productForm label {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+#productForm input[type="text"],
+#productForm textarea {
+    padding: 10px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+    font-size: 15px;
+    background: #fff;
+    margin-bottom: 2px;
+    resize: none;
+}
+
+#productForm textarea {
+    min-height: 90px;
+}
+
+.image-upload {
+    margin: 0 0 0 0;
+}
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 110px;
+    border: 2px dashed #bdbdbd;
+    border-radius: 10px;
+    background: #fafbfc;
+    padding: 16px 0 10px 0;
+    margin-bottom: 12px;
+    position: relative;
+    transition: border-color 0.2s;
+}
+.upload-area img#uploadPlaceholder,
+.upload-area img#addProductPreview {
+    position: static;
+    margin: 0 auto 8px auto;
+    display: block;
+    z-index: 1;
+}
+.upload-area img#addProductPreview {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    border-radius: 8px;
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.upload-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+}
+
+.upload-desc {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-primary {
+    background: #0a84ff;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(10,132,255,0.06);
+    margin-top: 8px;
+    width: 120px;
+}
+
+.btn-primary:hover {
+    background: #006edc;
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #222;
+    border: 1px solid #e5e7eb;
+}
+
+.btn-secondary:hover {
+    background: #e5e7eb;
+}
+
+.product-list-section {
+    margin-top: 48px;
+}
+
+.search-bar {
+    margin-bottom: 18px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #f2f4f7;
+    font-size: 15px;
+    color: #333;
+    outline: none;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product-table th, .product-table td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.product-table th {
+    background: #f5f5f7;
+    font-weight: 600;
+}
+
+.product-table td {
+    background: #fff;
+}
+
+#editProductModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.35);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+#editProductModal .modal-content {
+    background: #fff;
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 32px 28px 24px 28px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+#editProductModal h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #222;
+    text-align: center;
+}
+#editProductModal label {
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #444;
+}
+#editProductModal input[type="text"],
+#editProductModal textarea,
+#editProductModal input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.2px solid #e0e0e0;
+    border-radius: 7px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    background: #fafbfc;
+    transition: border 0.2s;
+}
+#editProductModal input[type="text"]:focus,
+#editProductModal textarea:focus {
+    border-color: #a0a0ff;
+    outline: none;
+}
+#editProductModal button.btn-primary {
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+#editProductModal button.btn-primary:hover {
+    background: #444;
+}
+#editProductModal #closeEditModal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+#editProductModal #closeEditModal:hover {
+    color: #222;
+}
+#editProductModal img#editProductPreview {
+    max-width: 100px;
+    display: block;
+    margin: 10px auto 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
