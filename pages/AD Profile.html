@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings</title>
+    <link rel="stylesheet" href="../css/AD Profile.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">Admin Panel</div>
+        <ul class="sidebar-menu">
+            <li><a href="AD Homepage.html">Admin Home</a></li>
+            <li><a href="AD Product Management.html">Products</a></li>
+            <li><a href="AD Order Management.html">Orders</a></li>
+            <li class="active"><a href="AD Profile.html">Profile</a></li>
+            <li><a href="AD Logout.html">Logout</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h1 class="page-title">Profile Settings</h1>
+        <div class="current-settings">
+            <h2>Current Settings</h2>
+            <div class="settings-row">
+                <div class="settings-col">
+                    <div class="settings-label">Email</div>
+                    <div class="settings-value">mikias191@gmail.com</div>
+                </div>
+                <div class="settings-col">
+                    <div class="settings-label">Password</div>
+                    <div class="settings-value">1234</div>
+                </div>
+            </div>
+        </div>
+        <form class="update-profile-form" id="profileForm" autocomplete="off">
+            <h2>Update Profile</h2>
+            <label for="currentEmail">Current Email</label>
+            <input type="email" id="currentEmail" name="currentEmail" placeholder="Enter current email" autocomplete="email">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter current password" autocomplete="current-password">
+            <label for="newEmail">New Email</label>
+            <input type="email" id="newEmail" name="newEmail" placeholder="Enter new email" autocomplete="email">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password" autocomplete="new-password">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password" autocomplete="new-password">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+    <script src="../js/AD Profile.js"></script>
+</body>
+</html>

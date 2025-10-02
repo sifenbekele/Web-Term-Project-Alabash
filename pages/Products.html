@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Alabash</title>
+    <link rel="stylesheet" href="../css/Products.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                        <img src="../assets/Logo.png" alt="Alabash" class="logo-img">
+                        <span class="logo-text">Alabash</span>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <a href="Products.html" class="active">Products</a>
+                    <a href="About.html">About</a>
+                    <a href="Contact.html">Contact</a>
+                </nav>
+                <div class="nav-actions">
+                    <a href="CP.html" class="user-link" style="margin-right:8px;">
+                        <img src="../assets/avatar_68667141ce97d2.86378354.jpg" alt="User" class="user-icon" style="height:28px;width:28px;border-radius:50%;vertical-align:middle;">
+                    </a>
+                    <a href="Cart.html" class="cart-link">
+                        🛒 Cart (<span id="cart-count">0</span>)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="products-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Vintage Collection</h1>
+                <p>Discover our complete collection of authentic vintage rock clothing</p>
+            </div>
+
+            <div class="filters">
+                <div class="filter-categories">
+                    <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+                    <button class="filter-btn" onclick="filterProducts('vintage-tees')">Vintage Tees</button>
+                    <button class="filter-btn" onclick="filterProducts('leather-jackets')">Leather Jackets</button>
+                    <button class="filter-btn" onclick="filterProducts('denim')">Denim</button>
+                    <button class="filter-btn" onclick="filterProducts('accessories')">Accessories</button>
+                </div>
+                <div class="filter-sort">
+                    <select id="sort-select" onchange="sortProducts()">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name A-Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Products should be loaded here by products.js-->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="Products.html">All Products</a></li>
+                        <li><a href="Products.html">Vintage Tees</a></li>
+                        <li><a href="Products.html">Leather Jackets</a></li>
+                        <li><a href="Products.html">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="Contact.html">Contact Us</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Care Instructions</a></li>
+                        <li><a href="#">Returns Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://instagram.com/alabash2" target="_blank">Instagram</a></li>
+                        <li><a href="https://x.com/alabash2" target="_blank">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                        <li><a href="#">TikTok</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Alabash. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/Products.js"></script>
+</body>
+</html> 
