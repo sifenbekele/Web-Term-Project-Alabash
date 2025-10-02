@@ -1,7 +1,7 @@
 # Alabash E-Commerce Platform
 
 ## Overview
-Alabash is a full-stack e-commerce web application for vintage clothing and accessories. It features user authentication, product catalog, shopping cart, order management, admin dashboard, and user profile management.
+Alabash is a full-stack e-commerce web application for clothing and accessories. It features user authentication, product catalog, shopping cart, order management, admin dashboard, and user profile management.
 
 - **Frontend:** HTML, CSS, JavaScript (modular, page-specific JS)
 - **Backend:** PHP (REST-like API), MySQL database
