@@ -56,7 +56,7 @@ Alabash is a full-stack e-commerce web application for clothing and accessories.
 3. **Run with XAMPP/LAMP**
    - Place the project in your web server's root directory (e.g., `htdocs` for XAMPP).
    - Start Apache and MySQL.
-   - Access the app at `http://localhost/rockvintage/index.html`.
+   - Access the app at `http://localhost/Alabash/index.html`.
 4. **Dependencies**
    - PHP 7.x or newer
    - MySQL
