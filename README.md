@@ -87,7 +87,7 @@ Follow this checklist to make sure your PHP backend and the entire application w
 
 ### 1. Environment Setup
 - Use XAMPP, MAMP, LAMP, or similar with Apache and PHP 7.x+.
-- Place the project folder (e.g., `rockvintage`) inside your web server's root directory (`htdocs` for XAMPP).
+- Place the project folder (e.g., `alabash`) inside your web server's root directory (`htdocs` for XAMPP).
 - Ensure the web server user has read/write permissions for all files and folders (especially for uploads).
 
 ### 2. Database Configuration
