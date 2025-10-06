@@ -20,6 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => false, 'message' => 'Product ID, name, and price are required.']);
         exit();
     }
+    if (!is_numeric($price) || $price < 0) {
+        echo json_encode(['success' => false, 'message' => 'Price must be a valid positive number.']);
+        exit();
+    }
+    if (!is_numeric($id)) {
+        echo json_encode(['success' => false, 'message' => 'Product ID must be numeric.']);
+        exit();
+    }
 
     $stmt = $conn->prepare("UPDATE products SET name=?, description=?, price=?, image=? WHERE id=?");
     $stmt->bind_param("ssdsi", $name, $description, $price, $image, $id);

@@ -12,7 +12,8 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $order_id = $_POST['order_id'] ?? '';
     $status = $_POST['status'] ?? '';
-    $allowed_statuses = ['ordered', 'processing', 'shipped', 'delivered', 'cancelled'];
+    // Align with schema: pending, confirmed, processing, shipped, delivered, cancelled, refunded
+    $allowed_statuses = ['pending','confirmed','processing','shipped','delivered','cancelled','refunded'];
 
     if (!$order_id || !$status || !in_array($status, $allowed_statuses)) {
         echo json_encode(['success' => false, 'message' => 'Order ID and valid status are required.']);

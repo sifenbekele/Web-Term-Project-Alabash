@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 header('Content-Type: application/json');
 session_start();
 require 'db.php';
@@ -19,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         respond(false, 'Email and password are required.');
     }
 
-    // Fetch user by email, including role
     $stmt = $conn->prepare("SELECT id, password, role FROM users WHERE email = ?");
     if (!$stmt) {
         respond(false, 'Database error: prepare failed.');
@@ -34,15 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_result($user_id, $hashed_password, $user_role);
         $stmt->fetch();
         if (password_verify($password, $hashed_password)) {
+            // Regenerate session ID to prevent fixation
+            session_regenerate_id(true);
             $_SESSION['user_id'] = $user_id;
             $_SESSION['email'] = $email;
             $_SESSION['role'] = $user_role;
             respond(true, 'Login successful!');
         } else {
-            respond(false, 'Password incorrect or not hashed.');
+            respond(false, 'Invalid credentials.');
         }
     } else {
-        respond(false, 'User not found.');
+        respond(false, 'Invalid credentials.');
     }
     $stmt->close();
     $conn->close();

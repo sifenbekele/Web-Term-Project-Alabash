@@ -39,6 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate new email if provided
     if ($new_email && $new_email !== $current_email) {
+        if (!filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid email format.']);
+            $conn->close();
+            exit();
+        }
         $stmt = $conn->prepare("SELECT id FROM users WHERE email=? AND id<>?");
         $stmt->bind_param("si", $new_email, $user_id);
         $stmt->execute();

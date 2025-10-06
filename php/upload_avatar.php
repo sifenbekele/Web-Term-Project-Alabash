@@ -13,6 +13,11 @@ if (!isset($_FILES['avatar'])) {
 }
 
 $file = $_FILES['avatar'];
+$maxSize = 5 * 1024 * 1024; // 5MB
+if ($file['size'] > $maxSize) {
+    echo json_encode(['success' => false, 'message' => 'File too large (max 5MB).']);
+    exit();
+}
 $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 if (!in_array($file['type'], $allowedTypes)) {
     echo json_encode(['success' => false, 'message' => 'Invalid file type.']);
@@ -24,9 +29,16 @@ $filename = uniqid('avatar_', true) . '.' . $ext;
 $targetFile = $targetDir . $filename;
 
 if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-    // Optionally, update the user's avatar in the DB (if you add an avatar column)
-    // For now, just return the path
-    echo json_encode(['success' => true, 'path' => 'assets/' . $filename]);
+    // Persist to DB immediately so profile reflects change
+    require 'db.php';
+    $user_id = $_SESSION['user_id'];
+    $relative = 'assets/' . $filename;
+    $stmt = $conn->prepare("UPDATE users SET avatar=? WHERE id=?");
+    $stmt->bind_param("si", $relative, $user_id);
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
+    echo json_encode(['success' => true, 'path' => $relative]);
 } else {
     echo json_encode(['success' => false, 'message' => 'Failed to upload avatar.']);
 }
