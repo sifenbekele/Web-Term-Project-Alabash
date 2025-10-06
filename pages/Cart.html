@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
     <link rel="stylesheet" href="../css/Cart.css">
 </head>
+
 <body>
     <header class="header">
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
-                        <img src="../assets/Logo.png" alt="Alabash" class="logo-img">
-                        <span class="logo-text">Alabash</span>
+                    <img src="../assets/Logo.png" alt="Alabash" class="logo-img">
+                    <span class="logo-text">Alabash</span>
                     </a>
                 </div>
                 <nav class="nav">
@@ -22,7 +24,8 @@
                 </nav>
                 <div class="nav-actions">
                     <a href="CP.html" class="user-link" style="margin-right:8px;">
-                        <img src="../assets/avatar_68667141ce97d2.86378354.jpg" alt="User" class="user-icon" style="height:28px;width:28px;border-radius:50%;vertical-align:middle;">
+                        <img src="../assets/avatar_68667141ce97d2.86378354.jpg" alt="User" class="user-icon"
+                            style="height:28px;width:28px;border-radius:50%;vertical-align:middle;">
                     </a>
                     <a href="Cart.html" class="cart-link">
                         🛒 Cart (<span id="cart-count">0</span>)
@@ -35,13 +38,20 @@
         <div class="cart-content">
             <h2>Cart</h2>
             <div class="cart-items">
-                
+
             </div>
             <div class="order-summary">
                 <h3>Order Summary</h3>
                 <div class="summary-row">
                     <span>Total</span>
-                    <span id="total-price">$165.00</span>
+                    <span id="total-price">ETB165.00</span>
+                </div>
+                <div class="shipping-block" style="margin-top:12px;">
+                    <label for="shipping-address" style="display:block;margin-bottom:6px;">Shipping Address</label>
+                    <textarea id="shipping-address" rows="3" placeholder="Street, City, State, ZIP"
+                        style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; resize:vertical;"></textarea>
+                    <div id="shipping-error" style="color:#e53935; margin-top:6px; display:none;">Shipping address is
+                        required.</div>
                 </div>
             </div>
             <button class="checkout-btn">Checkout</button>
@@ -89,4 +99,5 @@
     </footer>
     <script src="../js/Cart.js"></script>
 </body>
+
 </html>
