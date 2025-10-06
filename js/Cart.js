@@ -65,7 +65,7 @@ function removeItem(index) {
     renderCart();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     renderCart();
     document.querySelector('.checkout-btn').addEventListener('click', checkout);
     // Dynamic header avatar and logout
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     logoutBtn.className = 'logout-btn-header';
                     logoutBtn.style.marginLeft = '12px';
                     navActions.appendChild(logoutBtn);
-                    logoutBtn.addEventListener('click', async function() {
+                    logoutBtn.addEventListener('click', async function () {
                         await fetch('../php/logout.php');
                         window.location.reload();
                     });
@@ -100,7 +100,7 @@ function updateTotal() {
     for (let i = 0; i < cart.length; i++) {
         total += cart[i].price * cart[i].qty;
     }
-    document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('total-price').textContent = `ETB${total.toFixed(2)}`;
 }
 
 function saveCart() {
@@ -119,11 +119,22 @@ async function checkout() {
         product_id: item.product_id || 1, // fallback to 1 if not present
         quantity: item.qty
     }));
+    // Collect shipping address from input
+    const shippingInput = document.getElementById('shipping-address');
+    const shippingError = document.getElementById('shipping-error');
+    const shipping_address = shippingInput ? shippingInput.value.trim() : '';
+    if (!shipping_address) {
+        if (shippingError) shippingError.style.display = 'block';
+        if (shippingInput) shippingInput.focus();
+        return;
+    } else if (shippingError) {
+        shippingError.style.display = 'none';
+    }
     try {
         const res = await fetch('../php/create_order.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cart: cartForBackend })
+            body: JSON.stringify({ cart: cartForBackend, shipping_address })
         });
         const data = await res.json();
         if (data.success) {
@@ -132,6 +143,11 @@ async function checkout() {
             saveCart();
             renderCart();
         } else {
+            if ((data.message || '').toLowerCase().includes('shipping address')) {
+                if (shippingError) shippingError.style.display = 'block';
+                if (shippingInput) shippingInput.focus();
+                return;
+            }
             alert(data.message || 'Failed to place order.');
         }
     } catch (err) {

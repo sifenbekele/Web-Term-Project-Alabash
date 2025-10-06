@@ -1,4 +1,4 @@
-document.getElementById('signupForm').addEventListener('submit', async function(e) {
+document.getElementById('signupForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const name = document.getElementById('signup-name') ? document.getElementById('signup-name').value.trim() : '';
     const email = document.getElementById('email').value.trim();
@@ -21,10 +21,12 @@ document.getElementById('signupForm').addEventListener('submit', async function(
     try {
         const response = await fetch('../php/signup.php', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
         });
-        const data = await response.json();
+        const raw = await response.text();
+        let data;
+        try { data = JSON.parse(raw); } catch (_) { throw new Error(raw || `Signup failed with status ${response.status}`); }
         if (data.success) {
             errorMsg.style.color = '#43a047';
             errorMsg.textContent = data.message || 'Signup successful! You can now log in.';

@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const shopNowBtn = document.getElementById('shopNowBtn');
   const newArrivalsSection = document.querySelector('.new-arrivals');
 
   if (shopNowBtn && newArrivalsSection) {
-    shopNowBtn.addEventListener('click', function() {
+    shopNowBtn.addEventListener('click', function () {
       newArrivalsSection.scrollIntoView({ behavior: 'smooth' });
     });
   }
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
               </div>
             `;
             card.style.cursor = 'pointer';
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function () {
               openModal(loginModal);
             });
             productsContainer.appendChild(card);
@@ -71,15 +71,15 @@ if (showLogin) showLogin.addEventListener('click', e => {
   closeModal(signupModal);
   openModal(loginModal);
 });
-['loginForm','signupForm'].forEach(id => {
+['loginForm', 'signupForm'].forEach(id => {
   const form = document.getElementById(id);
-  if(form) form.addEventListener('submit', e => e.preventDefault());
+  if (form) form.addEventListener('submit', e => e.preventDefault());
 });
 
 // LOGIN FORM SUBMISSION (AJAX, with role-based redirect)
 const loginForm = document.getElementById('loginForm');
 if (loginForm) {
-  loginForm.addEventListener('submit', async function(e) {
+  loginForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
@@ -114,14 +114,19 @@ if (loginForm) {
 // SIGNUP FORM SUBMISSION (AJAX, with feedback)
 const signupForm = document.getElementById('signupForm');
 if (signupForm) {
-  signupForm.addEventListener('submit', async function(e) {
+  signupForm.addEventListener('submit', async function (e) {
     e.preventDefault();
+    const name = document.getElementById('signup-name').value.trim();
     const email = document.getElementById('signup-email').value.trim();
     const password = document.getElementById('signup-password').value;
     const confirmPassword = document.getElementById('signup-confirmPassword').value;
     const errorMsg = document.getElementById('signup-error');
     errorMsg.textContent = '';
 
+    if (!name) {
+      errorMsg.textContent = 'Name is required.';
+      return;
+    }
     if (password !== confirmPassword) {
       errorMsg.textContent = 'Passwords do not match.';
       return;
@@ -130,10 +135,16 @@ if (signupForm) {
     try {
       const response = await fetch('php/signup.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
       });
-      const data = await response.json();
+      const raw = await response.text();
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch (_) {
+        throw new Error(raw || `Signup failed with status ${response.status}`);
+      }
       if (data.success) {
         errorMsg.style.color = '#43a047';
         errorMsg.textContent = data.message || 'Signup successful! You can now log in.';
@@ -149,7 +160,7 @@ if (signupForm) {
       }
     } catch (err) {
       errorMsg.style.color = '#e53935';
-      errorMsg.textContent = 'An error occurred. Please try again.';
+      errorMsg.textContent = (err && err.message) ? err.message : 'An error occurred. Please try again.';
     }
   });
 }
